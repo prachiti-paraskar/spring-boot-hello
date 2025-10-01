@@ -1,0 +1,26 @@
+trigger:
+- main   # or master, depending on your branch name
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+# 1. Prepare SonarQube
+- task: SonarQubePrepare@5
+  inputs:
+    SonarQube: 'SonarQube-Service'   # your service connection
+    scannerMode: 'MSBuild'           # works for Maven/Gradle too
+    configMode: 'manual'
+    projectKey: 'spring-boot-hello'
+    projectName: 'Spring Boot Hello'
+
+# 2. Run Maven build + SonarQube analysis in one step
+- task: Maven@4
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'clean verify sonar:sonar'
+
+# 3. Publish results to SonarQube
+- task: SonarQubePublish@5
+  inputs:
+    pollingTimeoutSec: '300'
