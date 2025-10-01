@@ -2,7 +2,7 @@ trigger:
 - master   # or master, depending on your branch name
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'Azure Pipelines'
 
 steps:
 # 1. Prepare SonarQube
