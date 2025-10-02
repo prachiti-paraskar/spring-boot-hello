@@ -2,7 +2,7 @@ trigger:
 - master   # or master, depending on your branch name
 
 pool:
-  name: 'Azure Pipelines'
+  name: 'azure_agent'
 
 steps:
 # 1. Prepare SonarQube
