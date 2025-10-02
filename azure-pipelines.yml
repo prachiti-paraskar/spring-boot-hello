@@ -20,6 +20,7 @@ steps:
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'clean verify sonar:sonar'
+    options: '-Dsonar.login=$(SONAR_TOKEN)'
 
 # 3. Publish results to SonarQube
 - task: SonarQubePublish@7
