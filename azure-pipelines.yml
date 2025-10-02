@@ -4,6 +4,11 @@ trigger:
 pool:
   name: 'azure_agent'
 
+variables:
+  SONAR_HOST_URL: 'http://172.24.6.180:9002'   # Replace with your Ubuntu machine IP
+  SONAR_PROJECT_KEY: 'spring-boot-hello'
+  SONAR_PROJECT_NAME: 'Spring Boot Hello'
+  
 steps:
 # 1. Prepare SonarQube
 - task: SonarQubePrepare@7
@@ -13,6 +18,10 @@ steps:
     configMode: 'manual'
     projectKey: 'spring-boot-hello'
     projectName: 'Spring Boot Hello'
+    extraProperties: |
+      sonar.projectKey=$(SONAR_PROJECT_KEY)
+      sonar.projectName=$(SONAR_PROJECT_NAME)
+      sonar.host.url=$(SONAR_HOST_URL)
 
 
 # 2. Run Maven build + SonarQube analysis in one step
